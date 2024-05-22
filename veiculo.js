@@ -20,7 +20,7 @@ function Locacao( nome, auto, aluguel){
         return _Aluguel;
     }
 
-    this.setSalario = function(valor){ 
+    this.setAluguel = function(valor){ 
        if (typeof valor === 'number'){
         _Aluguel = valor
 
@@ -36,32 +36,9 @@ function Locacao( nome, auto, aluguel){
 
 }
 
-function Funcionario (nome, cargo, salario){
-    this.cargo = cargo; // this.salario = salario; (_) transformar em uma variaval para que ele não esteja mais exporta alteração(segurança) tornar atributo provado.
-    let _salario = salario;
 
-    //getter e setter
-    this.getSalario = function(){
-        return _salario;
-    }
-
-    this.setSalario = function(valor){ 
-       if (typeof valor === 'number'){
-        _salario = valor
-
-       }
-    } 
-
-    this.aumento = function(){
-        const novoSalario = _salario * 1.1; //multiplica 1 salario por ele mesmo + 0.1 = 10% pretendido.
-        _salario = novoSalario;
-    }
-
-    Pessoa.call(this, nome);//call CHAMA Pessoa construtora para dentro da funçao funcionário.
-}
-
-function Estagiario(nome){
-    Funcionario.call(this, nome, "Estagiario", 2000);
+function Moto(nome){
+    Locacao.call(this, nome, "Moto", 500);
 
     this.aumento = function(){
         const novoSalario = this.getSalario() * 1.07;
@@ -69,13 +46,16 @@ function Estagiario(nome){
     }
 }
 
-function Gerente (nome){
-    Funcionario.call(this, nome, "Gerente", 10000);
+
+function Caminhao (nome){
+    Funcionario.call(this, nome, "Caminhao", 2000);
     this.aumento = function(){
         const novoSalario = this.getSalario() * 1.15; //multiplica 1 salario por ele mesmo + 0.1 = 10% pretendido.
         this.setSalario(novoSalario);
     }
 }
+
+//usar referência de locatário. 22/05/2024 05:48
 
 const funcionario1 = new Funcionario ("Maria", "UX", 5000 );
 const funcionario2 = new Estagiario ("Pedro");
