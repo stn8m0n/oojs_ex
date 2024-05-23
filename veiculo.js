@@ -1,71 +1,66 @@
-function Motorista(nome){
+function Motorista(nome) {
     this.nome = nome;
-    this.dizNome = function(){
+    this.dizNome = function() {
         console.log(this.nome);
     }
-    this.dizAuto = function(){
+    this.dizAuto = function() {
         console.log(this.auto);
     }
-    this.dizAluguel = function(){
+    this.dizAluguel = function() {
         console.log(this.aluguel);
     }
-
 }
 
-function Locacao( nome, auto, aluguel){
+function Locacao(nome, auto, aluguel) {
     let _aluguel = aluguel;
 
-    //getter e setter
-    this.getAluguel = function(){
-        return _Aluguel;
+    // Getter e setter
+    this.getAluguel = function() {
+        return _aluguel;
     }
 
-    this.setAluguel = function(valor){ 
-       if (typeof valor === 'number'){
-        _Aluguel = valor
-
+    this.setAluguel = function(valor) { 
+       if (typeof valor === 'number') {
+            _aluguel = valor;
        }
     } 
 
-    this.aumento = function(){
-        const novoAluguel = _Aluguel * 1.1; //multiplica 1 salario por ele mesmo + 0.1 = 10% pretendido.
-        _salario = novoAluguel;
+    this.diaria = function() {
+        const novoAluguel = _aluguel * 1.1; // Multiplica o aluguel por 1.1 para aumentar 10%
+        _aluguel = novoAluguel;
     }
 
     Motorista.call(this, nome);
-
 }
 
+function Moto(nome) {
+    Locacao.call(this, nome, "Moto", 300);
 
-function Moto(nome){
-    Locacao.call(this, nome, "Moto", 500);
-
-    this.aumento = function(){
-        const novoSalario = this.getSalario() * 1.07;
-        this.setSalario(novoSalario);
+    this.diaria = function() {
+        const novoAluguel = this.getAluguel() * 1.07;
+        this.setAluguel(novoAluguel);
     }
 }
 
-
-function Caminhao (nome){
-    Funcionario.call(this, nome, "Caminhao", 2000);
-    this.aumento = function(){
-        const novoSalario = this.getSalario() * 1.15; //multiplica 1 salario por ele mesmo + 0.1 = 10% pretendido.
-        this.setSalario(novoSalario);
+function Caminhao(nome) {
+    Locacao.call(this, nome, "Caminhao", 1000);
+    this.diaria = function() {
+        const novoAluguel = this.getAluguel() * 1.15; // Multiplica o aluguel por 1.15 para aumentar 15%
+        this.setAluguel(novoAluguel);
     }
 }
 
-//usar referência de locatário. 22/05/2024 05:48
+// Usar referência de locatário. 22/05/2024 05:48
 
-const funcionario1 = new Funcionario ("Maria", "UX", 5000 );
-const funcionario2 = new Estagiario ("Pedro");
-const funcionario3 = new Gerente ("Paula");
+const cliente1 = new Locacao("Paula", "carro", 500);
+const cliente2 = new Moto("Pati");
+const cliente3 = new Caminhao("Mol");
 
-funcionario1.aumento();
-console.log(funcionario1.getSalario())
+cliente1.diaria();
+console.log(cliente1.getAluguel());
 
-funcionario2.aumento();
-console.log(funcionario2.getSalario())
+cliente2.diaria();
+console.log(cliente2.getAluguel());
 
-funcionario3.aumento();
-console.log(funcionario3.getSalario())
+cliente3.diaria();
+console.log(cliente3.getAluguel());
